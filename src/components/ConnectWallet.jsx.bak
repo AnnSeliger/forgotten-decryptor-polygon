@@ -1,0 +1,14 @@
+import React from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
+export default function ConnectWallet({ onNext }) {
+  return (
+    <div className="container">
+      <h1>Welcome to Forgotten Decryptor Portal</h1>
+      <ConnectButton />
+      <button onClick={onNext} style={{ marginTop: 20 }}>
+        Next: Collection Info
+      </button>
+    </div>
+  );
+}
