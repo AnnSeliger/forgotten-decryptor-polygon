@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
-import WalletModal from '../components/WalletModal'; // Убедитесь, что путь верный
+import WalletModal from '../components/WalletModal';
 import { Link } from 'react-router-dom';
 import '../styles.css';
 
@@ -65,15 +65,15 @@ export default function Home() {
   return (
     <div className="page-bg-home min-h-screen">
       <div className="container">
-        <button
-          className="connect-wallet-btn"
-          onClick={handleConnect}
-          onTouchStart={(e) => e.preventDefault()}
-        >
-          {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
-        </button>
-
-        <WalletModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        <div className="wallet-section">
+          <button
+            className="connect-wallet-btn"
+            onClick={handleConnect}
+            onTouchStart={(e) => e.preventDefault()}
+          >
+            {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
+          </button>
+        </div>
 
         <div className="page-content">
           <div className="text-overlay">
@@ -96,9 +96,18 @@ export default function Home() {
               <a href="https://polygonscan.com/address/0xD37d3E6cF2eA362E6fb41C96480859c544A3A598" target="_blank" rel="noopener noreferrer" className="text-link">
                 View Contract on PolygonScan
               </a>
+              <br /><br />
+              <div className="as-seen-on">
+                <span className="as-seen-text">as seen on</span>
+                <a href="https://nftcalendar.io/" target="_blank" rel="noopener noreferrer">
+                  <img src="/forgotten-decryptor-polygon/nft-logo.svg" alt="NFT Calendar" className="as-seen-logo" />
+                </a>
+              </div>
             </p>
           </div>
         </div>
+
+        <WalletModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
         {/* ====== Branches ====== */}
         <div className="branches-container">

@@ -1139,3 +1139,66 @@ html, body {
   background: #440088;
   box-shadow: 0 0 10px #ff6fff;
 }
+
+/* Стили для "as seen on" */
+.wallet-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* центрируем по горизонтали */
+  gap: 10px; /* расстояние между кнопкой и надписью */
+  margin-top: 20px;
+}
+
+.connect-wallet-btn {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.as-seen-on {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* расстояние между текстом и логотипом */
+  margin-top: 0;
+}
+
+.as-seen-text {
+  color: #d3aaff;
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.as-seen-logo {
+  max-width: 100px;
+  height: auto;
+  vertical-align: middle;
+}
+/* Унификация ссылок с .as-seen-text */
+.text-link {
+  color: #d3aaff;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-decoration: underline;
+}
+
+.text-link:hover {
+  color: #ff99ff;
+  text-shadow: 0 0 5px #ff99ff;
+}
+
+.as-seen-logo {
+  width: 200px; /* Увеличим до 200px, чтобы контент стал виден */
+  height: auto; /* Сохраняет пропорции */
+  min-height: 100px; /* Минимальная высота для видимости */
+  vertical-align: middle;
+  object-fit: contain; /* Убеждает браузер показывать контент внутри размеров */
+  border: 1px solid #ff6fff; /* Отладочная граница, удали после */
+}
+
+/* Адаптив: уменьшим на мобильных */
+@media (max-width: 480px) {
+  .as-seen-logo {
+    width: 150px;
+    min-height: 75px;
+  }
+}

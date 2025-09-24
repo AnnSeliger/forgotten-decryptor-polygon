@@ -6,6 +6,7 @@ import {
   useWalletClient,
   useConnect,
   useDisconnect,
+  useSwitchChain,
 } from "wagmi";
 import { polygon } from "viem/chains";
 import { CONTRACT_ADDRESS, CONTRACT_ABI } from "../contracts/constants";
@@ -181,10 +182,11 @@ function NFTMedia({ meta, className, style }) {
 
 /* ========= ОСНОВНОЙ КОМПОНЕНТ ========= */
 export default function Evolve() {
-  const { address, isConnected } = useAccount();
+  const { address, isConnected, chain } = useAccount();
   const { connect, connectors } = useConnect();
   const { disconnect } = useDisconnect();
-  const publicClient = usePublicClient();
+  const { switchChain } = useSwitchChain();
+  const publicClient = usePublicClient({ chainId: polygon.id });
   const { data: walletClient } = useWalletClient();
 
   const [tokens, setTokens] = useState([]);
@@ -206,7 +208,10 @@ export default function Evolve() {
   const BATCH_SIZE = 20;
 
   const loadNFTs = useCallback(async () => {
-    if (!isConnected || !address) return;
+    if (!isConnected || !address || chain?.id !== polygon.id) {
+      setError('Please connect your wallet to the Polygon network');
+      return;
+    }
     try {
       setLoading(true);
       setError(null);
@@ -247,7 +252,6 @@ export default function Evolve() {
               if (meta) {
                 meta.image = rewriteIpfs(meta.image);
                 meta.animation_url = rewriteIpfs(meta.animation_url);
-                // Извлекаем rarity из атрибутов метаданных
                 const rarity = meta.attributes?.find((a) => a.trait_type === "Rarity")?.value || "";
                 setTokens((prev) => {
                   const n = [...prev];
@@ -271,11 +275,14 @@ export default function Evolve() {
     } finally {
       setLoading(false);
     }
-  }, [address, isConnected, publicClient]);
+  }, [address, isConnected, publicClient, chain?.id]);
 
   useEffect(() => {
+    if (isConnected && chain?.id !== polygon.id) {
+      switchChain({ chainId: polygon.id });
+    }
     if (isConnected) loadNFTs();
-  }, [isConnected, loadNFTs]);
+  }, [isConnected, loadNFTs, chain?.id, switchChain]);
 
   /* === Прогресс веток для L3 === */
   const branchCounts = tokens
@@ -294,7 +301,13 @@ export default function Evolve() {
 
   /* === Эволюция L1 -> L2 === */
   const evolveToLevel2 = async (tokenId) => {
-    if (!walletClient || !address) return;
+    if (!walletClient || !address || chain?.id !== polygon.id) {
+      setError('Please connect your wallet to the Polygon network');
+      if (chain?.id !== polygon.id) {
+        switchChain({ chainId: polygon.id });
+      }
+      return;
+    }
     try {
       setEvolvingIds((prev) => new Set(prev).add(tokenId));
 
@@ -341,7 +354,13 @@ export default function Evolve() {
 
   /* === Эволюция L2 -> L3 === */
   const handleEvolveBranch = async (branch) => {
-    if (!walletClient || !address) return;
+    if (!walletClient || !address || chain?.id !== polygon.id) {
+      setError('Please connect your wallet to the Polygon network');
+      if (chain?.id !== polygon.id) {
+        switchChain({ chainId: polygon.id });
+      }
+      return;
+    }
 
     const branchTokens = tokens.filter((t) => t.level === 2 && t.branch === branch);
     const uniqueForms = [...new Set(branchTokens.map((t) => t.form))];
@@ -400,7 +419,7 @@ export default function Evolve() {
         <button
           className="connect-wallet-btn"
           onClick={isConnected ? disconnect : openConnectModal}
-          onTouchStart={(e) => e.preventDefault()} // Поддержка touch для мобильных
+          onTouchStart={(e) => e.preventDefault()}
         >
           {isConnected ? 'Disconnect Wallet' : 'Connect Wallet'}
         </button>
