@@ -3,6 +3,11 @@ import { Routes, Route, NavLink } from 'react-router-dom';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Evolve from './pages/Evolve.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+import Staking from './pages/Staking.jsx';
+import Loyalty from './pages/Loyalty.jsx';
+import Airdrop from './pages/Airdrop.jsx';
+import Presale from './pages/Presale.jsx';
 
 function App() {
   console.log('App rendering');
@@ -16,11 +21,42 @@ function App() {
         >
           Home
         </NavLink> |
+        {/* Presale теперь идет вторым */}
+        <NavLink
+          to="/presale"
+          className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
+        >
+          Presale
+        </NavLink> |
         <NavLink
           to="/evolve"
           className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
         >
           Evolve
+        </NavLink> |
+        <NavLink
+          to="/airdrop"
+          className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
+        >
+          Airdrop
+        </NavLink> |
+        <NavLink
+          to="/dashboard"
+          className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
+        >
+          Dashboard
+        </NavLink> |
+        <NavLink
+          to="/staking"
+          className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
+        >
+          Staking
+        </NavLink> |
+        <NavLink
+          to="/loyalty"
+          className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
+        >
+          Loyalty
         </NavLink> |
         <NavLink
           to="/about"
@@ -34,6 +70,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/evolve" element={<Evolve />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/airdrop" element={<Airdrop />} />
+          <Route path="/presale" element={<Presale />} />
+          <Route path="/staking" element={<Staking />} />
+          <Route path="/loyalty" element={<Loyalty />} />
         </Routes>
       </div>
     </div>

@@ -3,6 +3,7 @@ import { useAccount, useDisconnect } from 'wagmi';
 import WalletModal from '../components/WalletModal';
 import { Link } from 'react-router-dom';
 import '../styles.css';
+import { MYCEL_TOKEN_ADDRESS } from '../contracts/constants'; // Импортируем адрес токена
 
 export default function Home() {
   const { isConnected } = useAccount();
@@ -77,32 +78,97 @@ export default function Home() {
 
         <div className="page-content">
           <div className="text-overlay">
-            <h1 className="page-title">Welcome to Forgotten NFT Portal</h1>
+            <h1 className="page-title">Welcome to Mycelium Network</h1>
             <p className="text-light-purple">
-              Discover a mystical world of evolving pixel beings. Connect your wallet to explore the ForgottenNFT (FGT) collection.
+              <strong>Where Art Meets Sustainable Economics</strong>
               <br /><br />
-              Each NFT starts at Level 1. Evolve them to Level 2 on the{" "}
-              <Link to="/evolve" className="text-link">Evolve</Link> page.  
-              There are six evolution branches, each with five unique forms.  
-              Collect five Level 2 NFTs from the same branch to unlock a rare Level 3 resident with exclusive powers and artwork.
+              Discover the revolutionary ecosystem where <strong>ForgottenNFT collection</strong> merges with 
+              the <strong className="text-pink">MYCEL token</strong> to create unprecedented value for early adopters.
+            </p>
+
+            {/* Key Investment Highlights */}
+            <div className="investment-highlights">
+              <h2 className="highlight-title">🚀 Why Mycelium Stands Out</h2>
+              
+              <div className="highlight-grid">
+                <div className="highlight-card">
+                  <div className="highlight-icon">💰</div>
+                  <h3>Fixed Supply Economy</h3>
+                  <p>Only <strong>10,000,000 MYCEL</strong> will ever exist</p>
+                  <p className="highlight-sub">Zero inflation • Deflationary mechanics</p>
+                </div>
+
+                <div className="highlight-card">
+                  <div className="highlight-icon">🛡️</div>
+                  <h3>Transparent & Secure</h3>
+                  <p><strong>2-year team vesting</strong> • Liquidity locked</p>
+                  <p className="highlight-sub">Verified contracts • Full transparency</p>
+                </div>
+
+                <div className="highlight-card">
+                  <div className="highlight-icon">🌿</div>
+                  <h3>Dual Revenue Streams</h3>
+                  <p>Earn from <strong>NFT evolution</strong> + <strong>MYCEL rewards</strong></p>
+                  <p className="highlight-sub">Airdrops • Staking • Royalties</p>
+                </div>
+
+                <div className="highlight-card">
+                  <div className="highlight-icon">📈</div>
+                  <h3>Proven Value Growth</h3>
+                  <p><strong>50%</strong> of sales + <strong>1%</strong> royalties feed liquidity</p>
+                  <p className="highlight-sub">Sustainable tokenomics</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="quick-stats">
+              <div className="stat-item">
+                <span className="stat-number">10M</span>
+                <span className="stat-label">Total MYCEL Supply</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">3.5M</span>
+                <span className="stat-label">Airdrop Allocation</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">2YR</span>
+                <span className="stat-label">Team Vesting</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-number">6</span>
+                <span className="stat-label">Evolution Paths</span>
+              </div>
+            </div>
+
+            <p className="text-light-purple">
+              <strong>Immediate Opportunities:</strong>
+              <br />
+              • <strong>Airdrop:</strong> 150 MYCEL for Level 1-2 NFTs, 1000 MYCEL for Level 3
+              <br />
+              • <strong>Presale:</strong> Early access to MYCEL tokens
+              <br />
+              • <strong>Evolution:</strong> Increase NFT value through transformation
               <br /><br />
-              Trade or gift Level 2 NFTs on OpenSea to complete your branch collection  
-              and shape your destiny in the Garden of Forgotten Dreams.
-            <br /><br />
+              Each NFT starts at Level 1 and evolves through six unique branches, each with five forms. 
+              Collect five Level 2 NFTs from the same branch to unlock exclusive Level 3 residents with 
+              enhanced value and utility.
+              <br /><br />
+              <Link to="/about" className="cta-button">
+                Explore Detailed Tokenomics
+              </Link>
+              <br /><br />
               <a href="https://opensea.io/collection/forgottennft-458784060" target="_blank" rel="noopener noreferrer" className="text-link">
                 View Collection on OpenSea
               </a>
               <br />
               <a href="https://polygonscan.com/address/0xD37d3E6cF2eA362E6fb41C96480859c544A3A598" target="_blank" rel="noopener noreferrer" className="text-link">
-                View Contract on PolygonScan
+                View NFT Contract on PolygonScan
               </a>
-              <br /><br />
-              <div className="as-seen-on">
-                <span className="as-seen-text">as seen on</span>
-                <a href="https://nftcalendar.io/" target="_blank" rel="noopener noreferrer">
-                  <img src="/forgotten-decryptor-polygon/nft-logo.svg" alt="NFT Calendar" className="as-seen-logo" />
-                </a>
-              </div>
+              <br />
+              <a href={`https://polygonscan.com/address/${MYCEL_TOKEN_ADDRESS}`} target="_blank" rel="noopener noreferrer" className="text-link">
+                View MYCEL Token Contract on PolygonScan
+              </a>
             </p>
           </div>
         </div>
