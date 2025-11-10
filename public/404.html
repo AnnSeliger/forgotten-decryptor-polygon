@@ -5,18 +5,26 @@
     <title>Mycelium Network</title>
     <script type="text/javascript">
         // Single Page Apps for GitHub Pages
-        // https://github.com/rafgraph/spa-github-pages
-        var segmentCount = 0;
-        var l = window.location;
-        l.replace(
-            l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
-            '/forgotten-decryptor-polygon/' +
-            '?p=/' + l.pathname.split('/').slice(2).join('/').replace(/&/g, '~and~') +
-            (l.search ? '&q=' + l.search.slice(1).replace(/&/g, '~and~') : '') +
-            l.hash
-        );
+        var path = window.location.pathname;
+        
+        // Если мы уже на главной странице, не делаем редирект
+        if (path === '/forgotten-decryptor-polygon/' || path === '/forgotten-decryptor-polygon/index.html') {
+            // Ничего не делаем - уже на главной
+        } else {
+            // Извлекаем путь после названия репозитория
+            var repoPath = '/forgotten-decryptor-polygon';
+            var appPath = path.substring(repoPath.length);
+            
+            // Если путь не пустой, перенаправляем на хэш-роут
+            if (appPath) {
+                // Убираем начальный слеш если есть
+                appPath = appPath.replace(/^\//, '');
+                window.location.href = repoPath + '/#' + appPath;
+            }
+        }
     </script>
 </head>
 <body>
+    <p>Redirecting...</p>
 </body>
 </html>
