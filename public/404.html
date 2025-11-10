@@ -4,27 +4,23 @@
     <meta charset="utf-8">
     <title>Mycelium Network</title>
     <script type="text/javascript">
-        // Single Page Apps for GitHub Pages
+        // Simple redirect to hash router for GitHub Pages
         var path = window.location.pathname;
+        var repoName = 'forgotten-decryptor-polygon';
         
-        // Если мы уже на главной странице, не делаем редирект
-        if (path === '/forgotten-decryptor-polygon/' || path === '/forgotten-decryptor-polygon/index.html') {
-            // Ничего не делаем - уже на главной
-        } else {
-            // Извлекаем путь после названия репозитория
-            var repoPath = '/forgotten-decryptor-polygon';
-            var appPath = path.substring(repoPath.length);
-            
-            // Если путь не пустой, перенаправляем на хэш-роут
-            if (appPath) {
+        if (path.includes(repoName)) {
+            var appPath = path.split(repoName)[1];
+            if (appPath && appPath !== '/') {
                 // Убираем начальный слеш если есть
                 appPath = appPath.replace(/^\//, '');
-                window.location.href = repoPath + '/#' + appPath;
+                window.location.href = '/' + repoName + '/#' + appPath;
+            } else {
+                window.location.href = '/' + repoName + '/';
             }
         }
     </script>
 </head>
 <body>
-    <p>Redirecting...</p>
+    <p>Redirecting to Mycelium Network...</p>
 </body>
 </html>
