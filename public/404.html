@@ -1,23 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mycelium Network</title>
     <script type="text/javascript">
-        // Simple redirect to hash router for GitHub Pages
-        var path = window.location.pathname;
-        var repoName = 'forgotten-decryptor-polygon';
+        // Single Page Apps for GitHub Pages
+        // https://github.com/rafgraph/spa-github-pages
+        var pathSegments = window.location.pathname.split('/');
         
-        if (path.includes(repoName)) {
-            var appPath = path.split(repoName)[1];
-            if (appPath && appPath !== '/') {
-                // Убираем начальный слеш если есть
-                appPath = appPath.replace(/^\//, '');
-                window.location.href = '/' + repoName + '/#' + appPath;
-            } else {
-                window.location.href = '/' + repoName + '/';
+        // Проверяем, находимся ли мы в правильном репозитории
+        if (pathSegments[1] === 'forgotten-decryptor-polygon') {
+            // Если путь длиннее, чем просто репозиторий, делаем редирект
+            if (pathSegments.length > 2) {
+                var appPath = pathSegments.slice(2).join('/');
+                window.location.href = '/forgotten-decryptor-polygon/#' + appPath;
             }
         }
+        
+        // Защита от бесконечного редиректа
+        var segmentCount = 0;
+        var location = window.location;
+        
+        function redirect() {
+            segmentCount++;
+            if (segmentCount > 5) {
+                clearInterval(timer);
+                console.error('Redirect loop detected');
+                window.location.href = '/forgotten-decryptor-polygon/';
+                return;
+            }
+            
+            // Если уже на главной, останавливаемся
+            if (location.pathname === '/forgotten-decryptor-polygon/' || 
+                location.pathname === '/forgotten-decryptor-polygon/index.html') {
+                clearInterval(timer);
+                return;
+            }
+            
+            // Если есть путь приложения, редиректим на хэш
+            var appPath = location.pathname.replace('/forgotten-decryptor-polygon/', '');
+            if (appPath && appPath !== '/') {
+                location.replace('/forgotten-decryptor-polygon/#' + appPath);
+            }
+        }
+        
+        var timer = setInterval(redirect, 100);
+        redirect();
     </script>
 </head>
 <body>
