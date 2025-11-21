@@ -1,7 +1,7 @@
 // src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom'; // ИЗМЕНИЛИ BrowserRouter на HashRouter
 import { WagmiProvider } from 'wagmi';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RainbowKitProvider, darkTheme } from '@rainbow-me/rainbowkit';
@@ -33,9 +33,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <RainbowKitProvider theme={customTheme}>
-          <BrowserRouter basename="/forgotten-decryptor-polygon">
+          <HashRouter> {/* ИЗМЕНИЛИ BrowserRouter на HashRouter и УБРАЛИ basename */}
             <App />
-          </BrowserRouter>
+          </HashRouter>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

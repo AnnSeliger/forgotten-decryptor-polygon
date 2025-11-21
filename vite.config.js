@@ -2,29 +2,16 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/forgotten-decryptor-polygon/', // ✅ Base для GitHub Pages
+  base: '/forgotten-decryptor-polygon/',
   plugins: [react()],
-  server: {
-    open: true,
-    host: true,
-    strictBase: false, // Добавлено: отключает строгое соответствие base
-    proxy: {
-      '/ipfs': {
-        target: 'https://gateway.pinata.cloud/ipfs/',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/ipfs/, ''),
-        configure: (proxy) => {
-          proxy.on('error', (err) => {
-            console.error('Proxy error:', err);
-          });
-        },
-      },
-    },
-  },
   build: {
     outDir: 'dist',
-    chunkSizeWarningLimit: 1000,
-    minify: 'esbuild',
-    sourcemap: false,
-  },
+    // Убедитесь, что 404.html копируется
+    rollupOptions: {
+      input: {
+        main: './index.html',
+        404: './public/404.html'
+      }
+    }
+  }
 });

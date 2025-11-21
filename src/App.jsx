@@ -8,6 +8,7 @@ import Staking from './pages/Staking.jsx';
 import Loyalty from './pages/Loyalty.jsx';
 import Airdrop from './pages/Airdrop.jsx';
 import Presale from './pages/Presale.jsx';
+import Security from './pages/Security.jsx'; // ← Добавляем импорт Security
 
 function App() {
   console.log('App rendering');
@@ -63,6 +64,13 @@ function App() {
           className={({ isActive }) => `mx-2 hover:text-pink ${isActive ? 'text-pink font-bold' : ''}`}
         >
           About
+        </NavLink> |
+        {/* Добавляем Security после About с красным цветом */}
+        <NavLink
+          to="/security"
+          className={({ isActive }) => `mx-2 hover:text-red-400 ${isActive ? 'text-red-400 font-bold' : ''}`}
+        >
+          Security
         </NavLink>
       </nav>
       <div className="p-4">
@@ -75,6 +83,7 @@ function App() {
           <Route path="/presale" element={<Presale />} />
           <Route path="/staking" element={<Staking />} />
           <Route path="/loyalty" element={<Loyalty />} />
+          <Route path="/security" element={<Security />} /> {/* ← Добавляем маршрут Security */}
         </Routes>
       </div>
     </div>

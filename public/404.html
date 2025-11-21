@@ -1,13 +1,33 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Redirecting...</title>
-    <script>
-      window.location.href = '/forgotten-decryptor-polygon/' + window.location.pathname.replace(/^\/forgotten-decryptor-polygon/, '');
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mycelium Network</title>
+    <script type="text/javascript">
+        // Single Page Apps for GitHub Pages
+        var path = window.location.pathname;
+        var repoName = 'forgotten-decryptor-polygon';
+        
+        // Если мы на главной странице, ничего не делаем
+        if (path === '/' + repoName + '/' || path === '/' + repoName + '/index.html') {
+            // Остаемся на главной
+        } 
+        // Если у нас есть путь приложения
+        else if (path.startsWith('/' + repoName + '/')) {
+            var appPath = path.replace('/' + repoName + '/', '');
+            if (appPath && appPath !== '') {
+                // ДОБАВЛЯЕМ СЛЕШ после #: /#/presale вместо #presale
+                window.location.href = '/' + repoName + '/#/' + appPath;
+            }
+        }
+        // Если мы не в правильном пути, редиректим на главную
+        else {
+            window.location.href = '/' + repoName + '/';
+        }
     </script>
-  </head>
-  <body>
-    <p>Redirecting...</p>
-  </body>
+</head>
+<body>
+    <p>Redirecting to Mycelium Network...</p>
+</body>
 </html>
